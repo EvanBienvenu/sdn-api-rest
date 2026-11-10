@@ -12,7 +12,6 @@ import requests
 
 
 def obtenir_jeton(controleur, utilisateur, mot_de_passe):
-    """Demande un jeton d'authentification (serviceTicket) au contrôleur."""
     reponse = requests.post(
         f"{controleur}/api/v1/ticket",
         json={"username": utilisateur, "password": mot_de_passe},
@@ -23,7 +22,6 @@ def obtenir_jeton(controleur, utilisateur, mot_de_passe):
 
 
 def interroger(controleur, jeton, ressource):
-    """Envoie une requête GET authentifiée et renvoie la liste de résultats."""
     reponse = requests.get(
         f"{controleur}/api/v1/{ressource}",
         headers={"X-Auth-Token": jeton},
@@ -40,7 +38,6 @@ def main():
     parser.add_argument("--utilisateur", required=True, help="identifiant du contrôleur")
     args = parser.parse_args()
 
-    # Le mot de passe est demandé sans être affiché ni écrit dans le script
     mot_de_passe = getpass.getpass("Mot de passe : ")
 
     try:
